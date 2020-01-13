@@ -37,4 +37,26 @@ table {
 
 #chickenDinner {
     text-align: center;
+    margin: 10px;
+}
+
+.replay {
+    padding: 10px 20px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 5px;
+    background-color: #7fb1bf;
+    box-shadow: 0px 4px #74a3b0;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.replay:hover {
+    background-color: #74a3b0;
+    box-shadow: 0px 4px #7fb1bf;
+}
+
+.replay.hidden {
+    display: none;
 }

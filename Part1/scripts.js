@@ -1,5 +1,6 @@
 let playerID = document.getElementById("player");
 let winnerWinner = document.getElementById("chickenDinner");
+let replayBtn = document.querySelector(".replay");
 let turn = "X"
 
 function switchTurns() {
@@ -11,13 +12,14 @@ function nextMove() {
   
   return function(index){
     locked.push(index);
-    if (locked.length === 9 ) winnerWinner.innerText = "Draw!";
-    if (locked.length === 9 ) return;
     let square = document.getElementById(index);
     if (square.innerText === "") {
       !checkWinner(turn) ? square.innerText = turn : null;
       if (checkWinner(turn)) return winner(turn);
       switchTurns();
+      if (locked.length === 9 ) winnerWinner.innerText = "Draw!";
+      if (locked.length === 9 ) replayBtn.classList.remove("hidden");
+      if (locked.length === 9 ) return;
       playerID.innerText = turn;
     }
   }
@@ -37,7 +39,10 @@ function checkWinner(player) {
     checkRow(2, 5, 8, player) ||
     checkRow(0, 4, 8, player) ||
     checkRow(2, 4, 6, player)
-  ) result = true;
+  )  {
+    result = true;
+    replayBtn.classList.remove("hidden");
+  }
   
   return result;
 }
@@ -57,3 +62,5 @@ function getSquare(box) {
 }
 
 let play = nextMove();
+
+replayBtn.addEventListener("click", () => window.location.reload());
