@@ -1,24 +1,33 @@
 let playerID = document.getElementById("player");
+let winnerWinner = document.getElementById("chickenDinner");
 let turn = "X"
-
-function play(num) {
-  nextMove(document.getElementById(num))
-}
 
 function switchTurns() {
   return turn === "X" ? turn = "O" : turn = "X";
 }
 
-function nextMove(square) {
-  if (square.innerText === "") {
-    square.innerText = turn;
-    // if (winner(turn)) ;
-    switchTurns();
-    playerID.innerText = turn;
+function nextMove() {
+  let locked = [];
+  
+  return function(index){
+    locked.push(index);
+    if (locked.length === 9 ) winnerWinner.innerText = "Draw!";
+    if (locked.length === 9 ) return;
+    let square = document.getElementById(index);
+    if (square.innerText === "") {
+      !checkWinner(turn) ? square.innerText = turn : null;
+      if (checkWinner(turn)) return winner(turn);
+      switchTurns();
+      playerID.innerText = turn;
+    }
   }
 }
 
 function winner(player) {
+  winnerWinner.innerText = `Player ${player} wins!`;
+}
+
+function checkWinner(player) {
   let result = false;
   if (checkRow(0, 1, 2, player) ||
     checkRow(3, 4, 5, player) ||
@@ -46,3 +55,5 @@ function checkRow(a, b, c, player) {
 function getSquare(box) {
   return document.getElementById(box).innerText;
 }
+
+let play = nextMove();
