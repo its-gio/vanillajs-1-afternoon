@@ -51,6 +51,9 @@ function checkRow(a, b, c, player) {
   let result = false;
   
   if (getSquare(a) === player && getSquare(b) === player && getSquare(c) === player) {
+    document.getElementById(a).style.color = "red";
+    document.getElementById(b).style.color = "red";
+    document.getElementById(c).style.color = "red";
     result = true;
   }
   
